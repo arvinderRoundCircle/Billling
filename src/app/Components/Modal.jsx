@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const Modal = ({ isOpen , children, onClose, Width, showCross = true }) => {
-
-  
-
+const Modal = ({
+  isOpen,
+  children,
+  onClose = () => {},
+  Width,
+  showCross = true,
+}) => {
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key === "Escape" && isOpen) {
@@ -46,9 +49,7 @@ const Modal = ({ isOpen , children, onClose, Width, showCross = true }) => {
         <div
           className={`fixed top-0 left-0 right-0 z-30 flex items-center justify-center w-full h-screen bg-opacity-50 bg-gray-500  backdrop-filter backdrop-blur-sm`}
         >
-          <div
-            className={`relative bg-white rounded-3xl shadow  ${Width}`}
-          >
+          <div className={`relative bg-white rounded-3xl shadow  ${Width}`}>
             {showCross && onClose && (
               <button
                 type="button"

@@ -10,7 +10,7 @@ import RecieptLayout from "./Components/RecieptLayout";
 import ReciptShower from "./Components/ReciptShower";
 import { Icon } from "@iconify/react";
 import * as htmlToImage from "html-to-image";
-import pink from "../../public/pink.jpg"
+import pink from "../../public/pink.jpg";
 
 export default function Home() {
   const [modalOpen, SetModalOpen] = useState(true);
@@ -77,26 +77,17 @@ const downloadHandler = async (key, roomNo) => {
   return (
     <div className="">
       <div className=" flex flex-col">
-        
         <div className=" flex mt-12 mr-12 justify-center ">
-
-      <div className="   " >
+          {/* <div className="   " >
 
       <Image alt=""  className=""  src={pink} height={90} width={100} />
 
-      </div>
-   
+      </div> */}
 
-        <h1 className=" flex justify-center items-center text-pink-400 mt-5 text-3xl font-bold">
-          Pink Stayz
-           <span className=" text-purple-950 font-medium text-[50px] mb-8 ml-2"> +</span> 
-        </h1>
-
-      
-          
-
+          <h1 className=" mb-9 ml-2 flex justify-center items-center text-pink-400 mt-5 text-3xl font-bold">
+            Pink Stayz
+          </h1>
         </div>
-        
 
         <div className=" flex justify-center mt-4">
           <input

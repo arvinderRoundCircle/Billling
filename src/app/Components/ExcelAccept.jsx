@@ -1,20 +1,43 @@
 "use client";
 import React, { useRef, useState } from "react";
 import * as XLSX from "xlsx";
-import * as htmlToImage from 'html-to-image';
+import * as htmlToImage from "html-to-image";
 import { Icon } from "@iconify/react";
 
 const ALLOWED_FILE_TYPES = [
-  "xlsx", "xlsb", "xlsm", "xls", "xml", "csv", "txt", "ods", "fods", "uos",
-  "sylk", "dif", "dbf", "prn", "qpw", "123", "wb*", "wq*", "html", "htm"
-].map(x => `.${x}`).join(",");
+  "xlsx",
+  "xlsb",
+  "xlsm",
+  "xls",
+  "xml",
+  "csv",
+  "txt",
+  "ods",
+  "fods",
+  "uos",
+  "sylk",
+  "dif",
+  "dbf",
+  "prn",
+  "qpw",
+  "123",
+  "wb*",
+  "wq*",
+  "html",
+  "htm",
+]
+  .map((x) => `.${x}`)
+  .join(",");
 
 const make_cols = (refstr) => {
   const C = XLSX.utils.decode_range(refstr).e.c + 1;
-  return Array.from({ length: C }, (_, i) => ({ name: XLSX.utils.encode_col(i), key: i }));
+  return Array.from({ length: C }, (_, i) => ({
+    name: XLSX.utils.encode_col(i),
+    key: i,
+  }));
 };
 
-const ExcelAccept = ({dataHandler}) => {
+const ExcelAccept = ({ dataHandler }) => {
   const [file, setFile] = useState(null);
   const [data, setData] = useState([]);
   const [cols, setCols] = useState([]);
@@ -49,7 +72,7 @@ const ExcelAccept = ({dataHandler}) => {
       setCols(make_cols(ws["!ref"]));
       processData(data);
 
-      console.log("datae",data);
+      console.log("datae", data);
     };
     reader.readAsBinaryString(file);
   };
@@ -69,19 +92,15 @@ const ExcelAccept = ({dataHandler}) => {
       UnitUsed: item?.__EMPTY_12 ?? 0,
       BillAmount: item?.__EMPTY_14 ?? 0,
       TotalAmount: item?.__EMPTY_18 ?? 0,
-      Maintaince:item?.__EMPTY_15 ? item?.__EMPTY_15  :0,
-      securityDeposit:item?.__EMPTY_8 ? item?.__EMPTY_8 :0,
-      advanceAmount:item?.__EMPTY_20 ?item?.__EMPTY_20:0,
-      prevBalance:item?.__EMPTY_16 ? item?.__EMPTY_16 :0
-
-
-
+      Maintaince: item?.__EMPTY_15 ? item?.__EMPTY_15 : 0,
+      securityDeposit: item?.__EMPTY_8 ? item?.__EMPTY_8 : 0,
+      advanceAmount: item?.__EMPTY_20 ? item?.__EMPTY_20 : 0,
+      prevBalance: item?.__EMPTY_16 ? item?.__EMPTY_16 : 0,
     }));
-
 
     console.log(updatedDataReq);
 
-    dataHandler(updatedDataReq)
+    dataHandler(updatedDataReq);
 
     // setDataReq(updatedDataReq);
   };
@@ -116,14 +135,29 @@ const ExcelAccept = ({dataHandler}) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex w-[300px] justify-center items-center outline-1 outline-dashed hover:shadow-2xl rounded-xl outline-purple-400 p-3 flex-col">
-        <label htmlFor="file-upload" className="flex justify-center items-center outline outline-1 mt-12 hover:shadow-2xl outline-purple-400 p-3 rounded-[50%] flex-col cursor-pointer">
-          <Icon icon="uil:plus" id="file" className="text-purple-600" height={50} />
+        <label
+          htmlFor="file-upload"
+          className="flex justify-center items-center outline outline-1 mt-12 hover:shadow-2xl outline-purple-400 p-3 rounded-[50%] flex-col cursor-pointer"
+        >
+          <Icon
+            icon="uil:plus"
+            id="file"
+            className="text-purple-600"
+            height={50}
+          />
         </label>
         <h1 className="mt-3 text-base font-medium">Upload Files</h1>
-        <input id="file-upload" accept={ALLOWED_FILE_TYPES} onChange={handleChange} type="file" className="hidden" />
-        {sheetName && <h1 className="mt-4 font-medium">Selected File: {sheetName}</h1>}
+        <input
+          id="file-upload"
+          accept={ALLOWED_FILE_TYPES}
+          onChange={handleChange}
+          type="file"
+          className="hidden"
+        />
+        {sheetName && (
+          <h1 className="mt-4 font-medium">Selected File: {sheetName}</h1>
+        )}
       </div>
-      
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-import React from "react";
-import sign from "../../../public/sign.jpg"
+import React, { useState } from "react";
+import sign from "../../../public/sign.jpg";
 // import sign from "../../public/sign.jpg"
-import pink from "../../../public/pink.jpg"
+import pink from "../../../public/pink.jpg";
 
-const RecieptLayout = ({ buildingNo, data }) => {
+const RecieptLayout = ({ buildingNo, data, date }) => {
   const getDateInStringFormat = (date) => {
     const month = date
       .toLocaleString("default", { month: "long" })
@@ -20,8 +20,6 @@ const RecieptLayout = ({ buildingNo, data }) => {
     }${sign}${date.getFullYear()}`;
   };
 
-  console.log("dataer", data);
-
   return (
     <div className="   flex justify-center  rounded-xl  w-[760px]  min-h-[400px] ">
       <div className="   flex gap-3 ">
@@ -29,7 +27,7 @@ const RecieptLayout = ({ buildingNo, data }) => {
           <div className=" flex  w-full     border-b-2  border-y-gray-400 justify-evenly">
             <div className=" flex justify-center items-center">
               {/* <Icon height={45} icon="material-symbols-light:house-outline" /> */}
-              <Image alt=""  src={pink} width={100} />
+              <Image alt="" src={pink} width={100} />
             </div>
 
             <div className=" m-2 min-w-[300px] flex justify-center  flex-col items-center outline p-2  outline-1 outline-gray-400 rounded-2xl">
@@ -68,9 +66,7 @@ const RecieptLayout = ({ buildingNo, data }) => {
             </div>
 
             <div className=" mb-4  mr-1 flex justify-start outline outline-1  max-w-[250px] outline-gray-500 p-1 rounded-lg">
-              <h1 className=" text-base font-bold  ">
-                Month : {getDateInStringFormat(new Date(), "/")}
-              </h1>
+              <h1 className=" text-base font-bold  ">Month : {date}</h1>
             </div>
           </div>
 
